@@ -1,17 +1,23 @@
+import sys
+import os
+
+sys.path.append('scripts')
 from matrix import *
 import os, time, random, keyboard
 from txt_to_image import convert as to_image
 from sandpile import sandpile
+
 size = [35, 35]
 init_value = 0
 num_pattern = {0: ' ', 1: '.', 2: '+', 3: '@'}
 a = sandpile(*size, init_value, pattern=num_pattern)
-#counter = 0
 ind = [0, 0]
 a.pattern_mat[ind] = a.mat[ind]
 while True:
     a.show(1)
-    print(f'you are currently at row {ind[0]+1}, column {ind[1]+1}')
+    print(
+        f'you are currently at row {ind[0]+1}, column {ind[1]+1}\npress WSAD to move, J to put sand, K to erase sand, C to clear all sands'
+    )
     if keyboard.is_pressed('a'):
         if ind[1] > 0:
             a.pattern_mat[ind] = a.pattern[a.mat[ind]]
@@ -45,7 +51,5 @@ while True:
         a.mat.clear()
         a.transfer()
         a.pattern_mat[ind] = a.mat[ind]
-    #time.sleep(0.02)
+    time.sleep(0.01)
     os.system('cls')
-    #counter += 1
-#a.transfer(show_each_step = True, time_interval = 1)
